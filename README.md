@@ -1,27 +1,60 @@
-# Surfcond
+# 🌊 SurfCond
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+**Previsão Inteligente para Surfistas**
 
-## Development server
+O SurfCond é uma aplicação web desenvolvida para oferecer previsões oceânicas e meteorológicas detalhadas, permitindo que surfistas tomem decisões mais assertivas sobre quando e onde surfar. A ideia surgiu da vivência prática de surfistas que enfrentam, frequentemente, deslocamentos frustrantes até praias com condições ruins de surf.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🔍 Objetivo
 
-## Code scaffolding
+Desenvolver uma plataforma acessível e responsiva que concentre, de forma visual e organizada, as informações essenciais para a prática do surf, como:
+- Altura e direção da ondulação (swell)
+- Direção e velocidade do vento
+- Temperatura da água e do ar
+- Maré e fases da lua (futuramente)
+- Qualidade das condições com classificação automática
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🧪 Tecnologias Utilizadas
 
-## Build
+- **Angular 16** (Front-end SPA)
+- **TypeScript**
+- **HTML5 / CSS3**
+- **API StormGlass** – Fonte dos dados ambientais
+- **Render** – Plataforma de deploy gratuito
+- **Azure DevOps** – Organização do backlog e board do projeto
+- **GitHub** – Controle de versão e deploy
+- **Visual Studio Code** – IDE utilizada no desenvolvimento
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🚀 Instalação
 
-## Running unit tests
+Clone o repositório e instale as dependências:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+git clone https://github.com/daviborgesfelipe/surfcond.git
+cd surfcond
+npm install
+ng serve
+```
 
-## Running end-to-end tests
+Acesse a aplicação local em: `http://localhost:4200`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 🔗 Deploy
 
-## Further help
+O projeto é publicado automaticamente via GitHub na plataforma [Render](https://render.com/).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 📋 Funcionalidades da Primeira Entrega (MVP)
+
+- Consumo de dados reais da API StormGlass
+- Visualização gráfica de dados oceânicos por dia e hora
+- Foco em swell, vento e maré
+- Interface responsiva com gráficos utilizando `ng2-charts` e `Chart.js`
+
+## 📈 Próximos Passos
+
+- Implementar filtro por localidade/praia
+- Adicionar fases da lua e índice de qualidade automática
+- Suporte para alertas personalizados
+- Possível expansão para pescadores, remadores e outros esportes náuticos
+
+## 📚 Relatório Acadêmico
+
+Este projeto foi desenvolvido como parte do componente curricular HOW-X da UNIVALI, utilizando metodologias ágeis e ferramentas como Canvas de Proposta de Valor, Business Model Canvas, MVP Canvas e análise paramétrica de concorrentes.
