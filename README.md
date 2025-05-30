@@ -1,4 +1,4 @@
-# 🌊 SurfCond
+# 🌊 [SurfCond](https://surfcond.onrender.com/).
 
 **Previsão Inteligente para Surfistas**
 
@@ -46,7 +46,6 @@ O projeto é publicado automaticamente via GitHub na plataforma [Render](https:/
 - Consumo de dados reais da API StormGlass
 - Visualização gráfica de dados oceânicos por dia e hora
 - Foco em swell, vento e maré
-- Interface responsiva com gráficos utilizando `ng2-charts` e `Chart.js`
 
 ## 📈 Próximos Passos
 
