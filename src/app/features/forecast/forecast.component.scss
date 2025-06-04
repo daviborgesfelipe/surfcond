@@ -23,7 +23,8 @@
 :host {
   display: block;
   width: 100%;
-  padding: 1rem;
+  padding-inline: 1rem;
+  padding-block: 0.4rem;
   font-size: 0.9rem;
   color: #1a2728;
   background-color: rgba(198, 212, 214, 0.5); // cor da sua paleta
@@ -38,7 +39,6 @@ p {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
   justify-content: center;
 }
 
@@ -91,9 +91,11 @@ input:checked + .slider:before {
   font-weight: bold;
   color: #1a2728;
 }
+
 h2 {
   text-align: center;
 }
+
 p, h2, span {
   font-size: xx-small;
   @media (min-width: 768px) {
@@ -105,10 +107,17 @@ p, h2, span {
   }
 }
 
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .pagination-container {
   display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
+  justify-content: center;
+  margin-block: 0.4rem;
   gap: 1rem;
 
   .nav-button {
@@ -125,10 +134,10 @@ p, h2, span {
     height: 3.8vh;
     font-size: xx-small;
     @media (min-width: 768px) {
-      font-size: smaller;
+      font-size: x-small;
     }
     @media (min-width: 1024px) {
-      font-size: medium;
+      font-size: small;
     }
   }
 
