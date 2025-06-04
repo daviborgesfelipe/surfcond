@@ -6,6 +6,32 @@
   <span class="toggle-label">{{ tipoPrevisao === 'diaria' ? 'Previsão Diária' : 'Previsão Semanal' }}</span>
 </div>
 
+<div *ngIf="!forecastDiaria.length && !forecastSemanal.length">
+  <div class="titulo-container">
+    <h1>SurfCond</h1>
+    <div class="resumo-curto" *ngIf="isMobile">
+      <span>
+        O <strong>SurfCond</strong> é o seu aliado para pegar boas ondas com precisão.
+        A previsão mostra dados como altura, direção e período da ondulação, além do vento e da maré, tudo que um surfista precisa.
+      </span><br>
+    </div>
+
+    <div class="resumo-completo" *ngIf="!isMobile">
+      <span>
+        O <strong>SurfCond</strong> é o seu aliado para pegar boas ondas com precisão.
+        A previsão mostra dados como altura, direção e período da ondulação, além do vento e da maré, tudo que um surfista precisa.
+      </span><br>
+      <span>
+        As ondas são geradas por ventos que sopram sobre o oceano. Quando esses ventos são fortes e constantes, formam ondulações que viajam grandes distâncias até chegarem às praias.
+        Já a <strong>maré</strong> é resultado da atração gravitacional da Lua e do Sol, afetando a profundidade da água e, portanto, a formação da onda ideal.
+      </span><br>
+      <span>
+        Com esses dados, o SurfCond permite planejar sessões com mais segurança e diversão, evitando viagens perdidas e aproveitando melhor o swell.
+      </span>
+    </div>
+  </div>
+</div>
+
 <div *ngIf="tipoPrevisao === 'diaria' && forecastDiaria.length">
   <div *ngFor="let hour of forecastDiariaPaginada | slice:0:24">
     <p><strong>Hora: {{ hour.time | date:'shortTime' }}, {{ currentDiariaDate | date: 'EEEE, d \'de\' MMMM' }}</strong></p>

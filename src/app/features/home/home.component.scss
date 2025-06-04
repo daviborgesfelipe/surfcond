@@ -36,6 +36,10 @@ $border-color: #295641;
 $shadow-color: rgba(26, 39, 40, 0.4);
 $border-radius: 12px;
 
+h1 {
+  text-align: center;
+}
+
 .home-container {
   background-color: $primary-bg;
   border: 2px solid $border-color;

@@ -1,6 +1,7 @@
 <div class="hero-background">
   <div class="overlay">
     <div class="home-container">
+      <h1>SurfCond</h1>
       <app-region-selector (regiaoChange)="onRegiaoSelecionada($event)"></app-region-selector>
       <app-city-selector [regiao]="regiaoSelecionada" (cidadeChange)="onCidadeSelecionada($event)"></app-city-selector>
       <app-forecast [cidade]="cidadeSelecionada"></app-forecast>

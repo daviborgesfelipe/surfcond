@@ -91,7 +91,9 @@ input:checked + .slider:before {
   font-weight: bold;
   color: #1a2728;
 }
-
+h2 {
+  text-align: center;
+}
 p, h2, span {
   font-size: xx-small;
   @media (min-width: 768px) {
@@ -137,5 +139,17 @@ p, h2, span {
   .nav-button:disabled {
     background-color: #cbd5e1;
     cursor: not-allowed;
+  }
+}
+
+.titulo-container {
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  .resumo-curto,
+  .resumo-completo {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 }

@@ -16,13 +16,17 @@ export class ForecastComponent implements OnInit, OnChanges {
   tipoPrevisaoChecked = false;
   paginaAtual = 0;
   itensPorPagina = 3;
-
+  isMobile: boolean = false;
+  
   @Input() cidade: string = '';
 
   constructor(private stormglassService: StormglassService) {}
 
   ngOnInit(): void {
-    // Removido carregamento fixo, aguarda input
+    this.isMobile = window.innerWidth < 768; // você pode ajustar o breakpoint
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth < 768;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
