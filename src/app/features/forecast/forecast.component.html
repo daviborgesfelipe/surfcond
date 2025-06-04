@@ -1,1 +1,79 @@
-<p>forecast works!</p>
+<div class="toggle-container">
+  <label class="switch">
+    <input type="checkbox" [(ngModel)]="tipoPrevisaoChecked" (change)="alternarTipoPrevisao()" />
+    <span class="slider round"></span>
+  </label>
+  <span class="toggle-label">{{ tipoPrevisao === 'diaria' ? 'Previsão Diária' : 'Previsão Semanal' }}</span>
+</div>
+
+<div *ngIf="tipoPrevisao === 'diaria' && forecastDiaria.length">
+  <div *ngFor="let hour of forecastDiariaPaginada | slice:0:24">
+    <p><strong>Hora: {{ hour.time | date:'shortTime' }}, {{ currentDiariaDate | date: 'EEEE, d \'de\' MMMM' }}</strong></p>
+    <div class="row">
+      <div class="col">
+        <p><strong>Onda:</strong> {{ (hour.waveHeight  | number:'1.1-2') || 'n/a' }} m</p>
+        <p><strong>Direção:</strong> {{ (hour.waveDirection | direction) || 'n/a' }}</p>
+        <p><strong>Período:</strong> {{ (hour.wavePeriod | number:'1.1-2') || 'n/a' }} s</p>
+      </div>
+      <div class="col">
+        <p><strong>Maré:</strong> {{ hour.seaLevel | number:'1.1-2' }}</p>
+        <p><strong>Vento:</strong> {{ hour.windDirection | direction }}</p>
+        <p><strong>Velo:</strong> {{ hour.windSpeed | kmh | number:'1.1-2' }} km/h</p>
+      </div>
+    </div>
+    <hr />
+  </div>
+
+  <div class="pagination-container">
+    <button 
+      class="nav-button" 
+      (click)="paginaAnterior()" 
+      [disabled]="paginaAtual === 0">
+      Anterior
+    </button>
+    <button 
+      class="nav-button" 
+      (click)="proximaPagina()" 
+      [disabled]="(paginaAtual + 1) * itensPorPagina >= forecastDiaria.length">
+      Próximo
+    </button>
+  </div>
+</div>
+
+<div *ngIf="tipoPrevisao === 'semanaria' && forecastSemanal.length">
+  <div *ngFor="let dia of forecastSemanalPaginado">
+    <h2><strong>{{ dia.data | date: 'EEEE, d \'de\' MMMM' }}</strong></h2>
+
+    <div *ngFor="let periodo of ['matutino', 'vespertino', 'noturno']">
+      <p><strong>{{ periodo | titlecase }}:</strong></p>
+      <div class="row">
+        <div class="col">
+          <p><strong>Onda:</strong> {{ (dia[periodo]?.waveHeight | number:'1.1-2') || 'n/a' }} m</p>
+          <p><strong>Direção:</strong> {{ (dia[periodo]?.waveDirection | direction) || 'n/a' }}</p>
+          <p><strong>Período:</strong> {{ (dia[periodo]?.wavePeriod | number:'1.1-2') || 'n/a' }} s</p>
+        </div>
+        <div class="col">
+          <p><strong>Maré:</strong> {{ (dia[periodo]?.seaLevel | number:'1.1-2') || 'n/a' }}</p>
+          <p><strong>Vento:</strong> {{ dia[periodo]?.windDirection | direction }}</p>
+          <p><strong>Velo:</strong> {{ dia[periodo]?.windSpeed | kmh | number:'1.1-2' }} km/h</p>
+        </div>
+      </div>
+      <hr />
+    </div>
+
+    <div class="pagination-container">
+      <button 
+        class="nav-button" 
+        (click)="paginaAnterior()" 
+        [disabled]="paginaAtual === 0">
+        Anterior
+      </button>
+      <button 
+        class="nav-button" 
+        (click)="proximaPagina()" 
+        [disabled]="(paginaAtual + 1) >= forecastSemanal.length">
+        Próximo
+      </button>
+    </div>
+  </div>
+</div>
