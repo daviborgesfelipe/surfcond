@@ -5,6 +5,7 @@
     [items]="cidades"
     [(ngModel)]="cidadeSelecionada"
     (change)="onChange()"
-    [disabled]="disabled">
+    [disabled]="disabled"
+    [notFoundText]="cidades.length === 0 ? 'Selecione uma região primeiro' : 'Nenhuma cidade encontrada'">
   </ng-select>
 </div>
