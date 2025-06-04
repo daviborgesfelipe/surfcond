@@ -1,0 +1,10 @@
+<div class="selector">
+  <label for="cidade">Selecione a cidade:</label>
+  <ng-select
+    class="combo-selector"
+    [items]="cidades"
+    [(ngModel)]="cidadeSelecionada"
+    (change)="onChange()"
+    [disabled]="disabled">
+  </ng-select>
+</div>
