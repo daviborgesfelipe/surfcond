@@ -7,6 +7,12 @@
   width: 45vw;
   margin: 1rem;
   font-size: smaller;
+  @media (min-width: 768px) {
+    font-size: medium;
+  }
+  @media (min-width: 1024px) {
+    font-size: large;
+  }
 }
 
 select {
@@ -17,50 +23,23 @@ select {
 .combo-selector {
   padding: 0.5rem;
   border-radius: 8px;
-  border: 1px solid #295641; // verde escuro
-  background-color: #92b1a0; // #92b1a0 com transparência
-  color: #1a2728; // quase preto esverdeado
+  border: 1px solid #295641; 
+  background-color: #92b1a0; 
+  color: #1a2728; 
   max-width: 45vw;
   width: 45vw;
   font-size: smaller;
+  @media (min-width: 768px) {
+    font-size: medium;
+  }
+  @media (min-width: 1024px) {
+    font-size: large;
+  }
 }
 
 .combo-selector:focus {
   outline: none;
-  border-color: #658793; // cinza-azulado no foco
-  background-color: rgba(146, 177, 160, 0.01); // #92b1a0 com transparência
+  border-color: #658793; 
+  background-color: rgba(146, 177, 160, 0.01); 
   box-shadow: 0 0 4px #658793;
 }
-
-// ::ng-deep .ng-dropdown-panel {
-//   background-color: rgba(198, 212, 214, 0.95); // #c6d4d6 translúcido
-//   border: 1px solid #295641;
-//   border-radius: 6px;
-//   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-//   width: 45vw !important;
-//   max-width: 45vw !important;
-//   left: 0 !important; // força alinhamento com o container
-//   border-radius: 25% !important;
-// }
-
-// ::ng-deep .ng-option {
-//   padding: 0.5rem 1rem;
-//   background-color: rgba(198, 212, 214, 0.9); // fundo claro da paleta
-//   color: #1a2728;
-//   font-size: 0.95rem;
-//   border-radius: 25% !important;
-
-// }
-
-// ::ng-deep .ng-option:hover {
-//   background-color: #92b1a0; // verde claro no hover
-//   color: #1a2728;
-//   border-radius: 25% !important;
-
-// }
-
-// ::ng-deep .ng-option-selected {
-//   background-color: #658793; // azul acinzentado da paleta
-//   color: white;
-//   border-radius: 25% !important;
-// }

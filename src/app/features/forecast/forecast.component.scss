@@ -11,6 +11,13 @@
   font-size: smaller;
   border: 1px solid #295641;
   background-color: #92b1a0; // #92b1a0 com transparência
+  font-size: smaller;
+  @media (min-width: 768px) {
+    font-size: medium;
+  }
+  @media (min-width: 1024px) {
+    font-size: large;
+  }
 }
 
 :host {
@@ -87,6 +94,13 @@ input:checked + .slider:before {
 
 p, h2, span {
   font-size: xx-small;
+  @media (min-width: 768px) {
+    font-size: smaller;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: medium;
+  }
 }
 
 .pagination-container {
@@ -100,7 +114,6 @@ p, h2, span {
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
-    font-size: xx-small;
     border-radius: 9999px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -108,6 +121,13 @@ p, h2, span {
     width: 18.2vw;
     max-height: 3.8vh;
     height: 3.8vh;
+    font-size: xx-small;
+    @media (min-width: 768px) {
+      font-size: smaller;
+    }
+    @media (min-width: 1024px) {
+      font-size: medium;
+    }
   }
 
   .nav-button:hover {
