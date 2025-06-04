@@ -1,0 +1,9 @@
+<div class="selector">
+  <label for="cidade">Selecione a região:</label>
+  <ng-select
+    class="combo-selector"
+    [items]="regioes"
+    [(ngModel)]="regiaoSelecionada"
+    (change)="onChange()">
+  </ng-select>
+</div>
