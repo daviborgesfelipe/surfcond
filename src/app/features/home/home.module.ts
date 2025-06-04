@@ -8,13 +8,14 @@ import { RegionSelectorComponent } from 'src/app/shared/components/region-select
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ForecastModule } from '../forecast/forecast.module';
-
+import { AbreviarCidadePipe } from 'src/app/shared/pipes/abreviarCidade.pipe';
 
 @NgModule({
   declarations: [
     HomeComponent,
     RegionSelectorComponent,
     CitySelectorComponent,
+    AbreviarCidadePipe
   ],
   imports: [
     CommonModule,
@@ -24,7 +25,8 @@ import { ForecastModule } from '../forecast/forecast.module';
     ForecastModule
   ],
     exports: [
-    HomeComponent
+    HomeComponent,
+    AbreviarCidadePipe
   ]
 })
 export class HomeModule { }

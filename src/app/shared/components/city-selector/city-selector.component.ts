@@ -14,12 +14,14 @@ import {
 export class CitySelectorComponent implements OnChanges {
   todasCidades: { [regiao: string]: string[] } = {
     'Santa Catarina': [
-      'Florianópolis',
-      'Balneário Camboriú',
+      'São Francisco',
+      'Navegantes',
       'Itajaí',
+      'Balneário Camboriú',
+      'Florianópolis',
+      'Palhoça',
       'Garopaba',
       'Imbituba',
-      'Navegantes',
     ],
   };
 

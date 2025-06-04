@@ -68,6 +68,8 @@ export class ForecastComponent implements OnInit, OnChanges {
       imbituba: { lat: -28.2398, lng: -48.6659 },
       garopaba: { lat: -28.0976, lng: -48.6201 },
       florianopolis: { lat: -27.6896, lng: -48.4994 },
+      'sao francisco': { lat: -26.2305, lng: -48.5004 },
+      palhoca: { lat: -27.9032, lng: -48.5896 },
     };
 
     const coords = praias[cidadeFormatada];
