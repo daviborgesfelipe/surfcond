@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div class="hero-background">
+  <div class="overlay">
+    <div class="home-container">
+      <app-region-selector (regiaoChange)="onRegiaoSelecionada($event)"></app-region-selector>
+      <app-city-selector [regiao]="regiaoSelecionada" (cidadeChange)="onCidadeSelecionada($event)"></app-city-selector>
+      <app-forecast [cidade]="cidadeSelecionada"></app-forecast>
+    </div>
+  </div>
+</div>

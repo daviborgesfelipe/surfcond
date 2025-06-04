@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  cidadeSelecionada: string = '';
+  regiaoSelecionada: string = '';
 
+  onCidadeSelecionada(cidade: string) {
+    this.cidadeSelecionada = cidade;
+  }
+
+  onRegiaoSelecionada(regiao: string) {
+    this.regiaoSelecionada = regiao;
+  }
 }
