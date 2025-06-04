@@ -1,14 +1,33 @@
 <div class="toggle-container">
-  <label class="switch">
-    <input type="checkbox" [(ngModel)]="tipoPrevisaoChecked" (change)="alternarTipoPrevisao()" />
-    <span class="slider round"></span>
-  </label>
-  <span class="toggle-label">{{ tipoPrevisao === 'diaria' ? 'Previsão Diária' : 'Previsão Semanal' }}</span>
+  <div class="pagination-container" *ngIf="forecastDiaria.length && forecastSemanal.length">
+    <button *ngIf="!isMobile"
+      class="nav-button" 
+      (click)="paginaAnterior()" 
+      [disabled]="paginaAtual === 0">
+      Anterior
+    </button>
+  </div>
+  <div class="toggle-container">
+    <label class="switch">
+      <input type="checkbox" [(ngModel)]="tipoPrevisaoChecked" (change)="alternarTipoPrevisao()" />
+      <span class="slider round"></span>
+    </label>
+    <span class="toggle-label">{{ tipoPrevisao === 'diaria' ? ' Previsão Diária' : ' Previsão Semanal' }}</span>
+  </div>
+  <div class="pagination-container" *ngIf="forecastDiaria.length && forecastSemanal.length">
+    <button *ngIf="!isMobile"
+      class="nav-button" 
+      (click)="proximaPagina()" 
+      title="Próximo"
+      [disabled]="(paginaAtual + 1) >= forecastSemanal.length">
+      Próximo
+    </button>
+  </div>
 </div>
 
 <div *ngIf="!forecastDiaria.length && !forecastSemanal.length">
   <div class="titulo-container">
-    <h1>SurfCond</h1>
+    <br>
     <div class="resumo-curto" *ngIf="isMobile">
       <span>
         O <strong>SurfCond</strong> é o seu aliado para pegar boas ondas com precisão.
@@ -50,7 +69,7 @@
     <hr />
   </div>
 
-  <div class="pagination-container">
+  <div class="pagination-container" *ngIf="isMobile">
     <button 
       class="nav-button" 
       (click)="paginaAnterior()" 
@@ -87,7 +106,7 @@
       <hr />
     </div>
 
-    <div class="pagination-container">
+    <div class="pagination-container" *ngIf="isMobile">
       <button 
         class="nav-button" 
         (click)="paginaAnterior()" 

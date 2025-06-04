@@ -1,5 +1,5 @@
 // forecast.component.ts
-import { Component, Input, OnInit, OnChanges, SimpleChanges, } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { StormglassService } from 'src/app/core/services/stormglass.service';
 
@@ -17,16 +17,16 @@ export class ForecastComponent implements OnInit, OnChanges {
   paginaAtual = 0;
   itensPorPagina = 3;
   isMobile: boolean = false;
-  
+
   @Input() cidade: string = '';
 
   constructor(private stormglassService: StormglassService) {}
 
   ngOnInit(): void {
-    this.isMobile = window.innerWidth < 768; // você pode ajustar o breakpoint
-    window.addEventListener('resize', () => {
-      this.isMobile = window.innerWidth < 768;
-    });
+    this.onResize(); // inicializa com base na tela atual
+    if (this.cidade) {
+      this.carregarPrevisoes(this.cidade);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -40,6 +40,11 @@ export class ForecastComponent implements OnInit, OnChanges {
       this.forecastSemanal = [];
       this.carregarPrevisoes(changes['cidade'].currentValue);
     }
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.isMobile = window.innerWidth <= 425 ;
   }
 
   alternarTipoPrevisao() {
