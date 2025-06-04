@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+.selector {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-selector {
+  width: 80%;
+  padding: 0.8rem 1.2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #ffcc00;
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-selector:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.paleta-cores {
+  
+}
