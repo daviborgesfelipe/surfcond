@@ -15,6 +15,7 @@ export class StormglassService {
       .set('longitude', lng.toString())
       .set('models', 'best_match')
       .set('temporal_resolution', 'hourly_3')
+      .set('timezone', 'America/Sao_Paulo')
       .set(
         'hourly',
         [
@@ -45,7 +46,7 @@ export class StormglassService {
       .set('latitude', lat.toString())
       .set('longitude', lng.toString())
       .set('hourly', ['wind_speed_10m', 'wind_direction_10m'].join(','))
-      .set('timezone', 'auto')
+      .set('timezone', 'America/Sao_Paulo')
       .set('wind_speed_unit', 'kmh')
       .set('timeformat', 'iso8601')
       .set('forecast_days', '7');
