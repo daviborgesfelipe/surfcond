@@ -1,5 +1,5 @@
-<div class="toggle-container">
-  <div class="pagination-container" *ngIf="forecastDiaria.length && forecastSemanal.length">
+<div class="toggle-container" *ngIf="forecastDiaria.length && forecastSemanal.length">
+  <div class="pagination-container" >
     <button *ngIf="!isMobile"
       class="nav-button" 
       (click)="paginaAnterior()" 
@@ -14,7 +14,7 @@
     </label>
     <span class="toggle-label">{{ tipoPrevisao === 'diaria' ? ' Previsão Diária' : ' Previsão Semanal' }}</span>
   </div>
-  <div class="pagination-container" *ngIf="forecastDiaria.length && forecastSemanal.length">
+  <div class="pagination-container">
     <button *ngIf="!isMobile"
       class="nav-button" 
       (click)="proximaPagina()" 
@@ -28,24 +28,34 @@
 <div *ngIf="!forecastDiaria.length && !forecastSemanal.length">
   <div class="titulo-container">
     <br>
+
+    <!-- Resumo para mobile -->
     <div class="resumo-curto" *ngIf="isMobile">
       <span>
-        O <strong>SurfCond</strong> é o seu aliado para pegar boas ondas com precisão.
-        A previsão mostra dados como altura, direção e período da ondulação, além do vento e da maré, tudo que um surfista precisa.
-      </span><br>
+        O <strong>SurfCond</strong> ajuda você a identificar os melhores momentos para surfar com base em dados atualizados do mar.
+        A previsão <strong>diária</strong> mostra as condições de 3 em 3 horas. Já a <strong>semanal</strong> resume os dados por períodos do dia.
+        São exibidas informações como:
+        <br><br>
+        <strong>Altura da onda</strong> (em metros), <strong>direção</strong> da ondulação, <strong>período</strong> (tempo entre ondas), <strong>maré</strong>, além da <strong>velocidade</strong> e <strong>direção do vento</strong>.
+      </span>
     </div>
 
+    <!-- Resumo para desktop -->
     <div class="resumo-completo" *ngIf="!isMobile">
       <span>
-        O <strong>SurfCond</strong> é o seu aliado para pegar boas ondas com precisão.
-        A previsão mostra dados como altura, direção e período da ondulação, além do vento e da maré, tudo que um surfista precisa.
-      </span><br>
+        O <strong>SurfCond</strong> é a sua ferramenta para entender as condições do mar com precisão.
+        Com ele, você pode visualizar a <strong>previsão diária</strong> (a cada 3 horas) ou a <strong>previsão semanal</strong> (agrupada em matutino, vespertino e noturno).
+      </span><br><br>
+
+      <span><strong>Altura da Onda:</strong> tamanho médio das ondas (m).</span><br>
+      <span><strong>Direção da Onda:</strong> de onde as ondas estão vindo (ex: Leste).</span><br>
+      <span><strong>Período:</strong> intervalo entre ondas consecutivas. Períodos maiores indicam melhores ondulações.</span><br>
+      <span><strong>Maré:</strong> variação no nível do mar que influencia na formação das ondas.</span><br>
+      <span><strong>Vento:</strong> inclui direção e velocidade, que afetam diretamente a qualidade das ondas.</span><br><br>
+
       <span>
-        As ondas são geradas por ventos que sopram sobre o oceano. Quando esses ventos são fortes e constantes, formam ondulações que viajam grandes distâncias até chegarem às praias.
-        Já a <strong>maré</strong> é resultado da atração gravitacional da Lua e do Sol, afetando a profundidade da água e, portanto, a formação da onda ideal.
-      </span><br>
-      <span>
-        Com esses dados, o SurfCond permite planejar sessões com mais segurança e diversão, evitando viagens perdidas e aproveitando melhor o swell.
+        Com essas informações, você pode planejar suas sessões com mais segurança e performance,
+        aproveitando o melhor do swell e evitando viagens sem onda.
       </span>
     </div>
   </div>
