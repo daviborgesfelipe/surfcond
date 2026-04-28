@@ -93,8 +93,10 @@ export class ForecastComponent implements OnInit, OnChanges {
 
       // semanal
       const inicio = new Date(hoje);
+      inicio.setHours(0, 0, 0, 0);
       const fim = new Date(inicio);
       fim.setDate(fim.getDate() + 6);
+      fim.setHours(23, 59, 59, 999);
 
       const agrupadoPorDia: { [data: string]: any[] } = {};
       previsaoCompleta.forEach((h: any) => {
