@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -32,12 +32,7 @@ export class StormglassService {
         ].join(',')
       );
 
-    return this.http.get<any>(url, { params }).pipe(
-      map((response) => {
-        console.log(response);
-        return response;
-      })
-    );
+    return this.http.get<any>(url, { params });
   }
 
   getForecastWind(lat: number, lng: number): Observable<any> {
@@ -51,11 +46,6 @@ export class StormglassService {
       .set('timeformat', 'iso8601')
       .set('forecast_days', '7');
 
-    return this.http.get<any>(url, { params }).pipe(
-      map((response) => {
-        console.log('🌬️ Previsão de Vento:', response);
-        return response;
-      })
-    );
+    return this.http.get<any>(url, { params });
   }
 }
