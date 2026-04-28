@@ -1,8 +1,10 @@
 <div class="selector">
-  <label for="cidade">Selecione a região:</label>
+  <label for="regiao">{{ textos.labels.region }}</label>
+  <span class="selector-icon material-icons" aria-hidden="true">place</span>
   <ng-select
     class="combo-selector"
     [items]="regioes"
+    [placeholder]="regiaoSelecionada ? '' : textos.placeholders.region"
     [(ngModel)]="regiaoSelecionada"
     (change)="onChange()">
   </ng-select>

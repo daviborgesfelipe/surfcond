@@ -15,5 +15,8 @@ export class HomeComponent {
 
   onRegiaoSelecionada(regiao: string) {
     this.regiaoSelecionada = regiao;
+    if (!regiao) {
+      this.cidadeSelecionada = '';
+    }
   }
 }

@@ -2,6 +2,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { StormglassService } from 'src/app/core/services/stormglass.service';
+import appContent from 'src/assets/content/surfcond-content.json';
 
 @Component({
   selector: 'app-forecast',
@@ -12,6 +13,9 @@ import { StormglassService } from 'src/app/core/services/stormglass.service';
 export class ForecastComponent implements OnInit, OnChanges {
   forecastDiaria: any[] = [];
   forecastSemanal: any[] = [];
+  textos = appContent.forecast;
+  infoCards = appContent.forecast.infoCards;
+  infoCarouselItems = [...this.infoCards, ...this.infoCards, ...this.infoCards];
   tipoPrevisao: 'diaria' | 'semanaria' = 'diaria';
   tipoPrevisaoChecked = false;
   paginaAtual = 0;
@@ -56,23 +60,10 @@ export class ForecastComponent implements OnInit, OnChanges {
   }
 
   carregarPrevisoes(cidade: string) {
-    const cidadeFormatada = cidade
-      .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '')
-      .toLowerCase();
+    const cidadeFormatada = this.normalizeText(cidade);
 
-    const praias: { [nome: string]: { lat: number; lng: number } } = {
-      itajai: { lat: -26.8995, lng: -48.6319 },
-      'balneario camboriu': { lat: -26.9811, lng: -48.6333 },
-      navegantes: { lat: -26.8838, lng: -48.6487 },
-      imbituba: { lat: -28.2398, lng: -48.6659 },
-      garopaba: { lat: -28.0976, lng: -48.6201 },
-      florianopolis: { lat: -27.6896, lng: -48.4994 },
-      'sao francisco': { lat: -26.2305, lng: -48.5004 },
-      palhoca: { lat: -27.9032, lng: -48.5896 },
-    };
-
-    const coords = praias[cidadeFormatada];
+    const praias = appContent.locations;
+    const coords = praias[cidadeFormatada as keyof typeof praias];
     if (!coords) return;
 
     const { lat, lng } = coords;
@@ -181,9 +172,12 @@ export class ForecastComponent implements OnInit, OnChanges {
     return hora ? hora.time : '';
   }
 
-  get currentSemanariaDate(): string {
-    const hora = this.forecastSemanal[0];
-    return hora ? hora.data : '';
+  private normalizeText(value: string): string {
+    return value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
   }
 
   proximaPagina() {

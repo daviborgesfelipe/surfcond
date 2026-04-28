@@ -1,11 +1,13 @@
 <div class="selector">
-  <label for="cidade">Selecione a cidade:</label>
+  <label for="cidade">{{ textos.labels.city }}</label>
+  <span class="selector-icon material-icons" aria-hidden="true">waves</span>
   <ng-select
     class="combo-selector"
     [items]="cidades"
+    [placeholder]="cidadeSelecionada ? '' : textos.placeholders.city"
     [(ngModel)]="cidadeSelecionada"
     (change)="onChange()"
     [disabled]="disabled"
-    [notFoundText]="cidades.length === 0 ? 'Selecione uma região primeiro' : 'Nenhuma cidade encontrada'">
+    [notFoundText]="cidades.length === 0 ? textos.notFound.cityWithoutRegion : textos.notFound.cityEmpty">
   </ng-select>
 </div>

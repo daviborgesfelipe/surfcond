@@ -5,6 +5,7 @@ import {
   EventEmitter,
   OnChanges,
 } from '@angular/core';
+import appContent from 'src/assets/content/surfcond-content.json';
 
 @Component({
   selector: 'app-city-selector',
@@ -12,18 +13,8 @@ import {
   styleUrls: ['./city-selector.component.scss'],
 })
 export class CitySelectorComponent implements OnChanges {
-  todasCidades: { [regiao: string]: string[] } = {
-    'Santa Catarina': [
-      'São Francisco',
-      'Navegantes',
-      'Itajaí',
-      'Balneário Camboriú',
-      'Florianópolis',
-      'Palhoça',
-      'Garopaba',
-      'Imbituba',
-    ],
-  };
+  textos = appContent.selectors;
+  todasCidades: { [regiao: string]: string[] } = appContent.selectors.citiesByRegion;
 
   cidades: string[] = [];
   cidadeSelecionada = '';
@@ -35,6 +26,10 @@ export class CitySelectorComponent implements OnChanges {
   ngOnChanges(): void {
     if (this.regiao) {
       this.cidades = this.todasCidades[this.regiao] || [];
+      this.cidadeSelecionada = '';
+      this.cidadeChange.emit('');
+    } else {
+      this.cidades = [];
       this.cidadeSelecionada = '';
       this.cidadeChange.emit('');
     }

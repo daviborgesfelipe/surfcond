@@ -8,10 +8,7 @@ export class DirectionPipe implements PipeTransform {
   transform(degrees: number): string {
     if (degrees === null || degrees === undefined) return 'n/a';
 
-    const directions = [
-      'Norte', 'Nordeste', 'Leste', 'Sudeste',
-      'Sul', 'Sudoeste', 'Oeste', 'Noroeste', 'Norte'
-    ];
+    const directions = ['N', 'NE', 'L', 'SE', 'S', 'SO', 'O', 'NO', 'N'];
 
     const index = Math.round(degrees / 45);
     return directions[index];

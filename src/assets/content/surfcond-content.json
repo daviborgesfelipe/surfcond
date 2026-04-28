@@ -1,0 +1,130 @@
+{
+  "selectors": {
+    "regions": [
+      "Litoral Norte",
+      "Grande Florianópolis",
+      "Litoral Sul"
+    ],
+    "citiesByRegion": {
+      "Litoral Norte": [
+        "São Francisco",
+        "Navegantes",
+        "Itajaí",
+        "Balneário Camboriú"
+      ],
+      "Grande Florianópolis": [
+        "Campeche",
+        "Guarda do Embaú"
+      ],
+      "Litoral Sul": [
+        "Silveira",
+        "Praia da Vila"
+      ]
+    },
+    "placeholders": {
+      "region": "Escolha a região...",
+      "city": "Escolha sua praia"
+    },
+    "labels": {
+      "region": "Selecione a região:",
+      "city": "Selecione a cidade:"
+    },
+    "notFound": {
+      "cityWithoutRegion": "Selecione uma região primeiro",
+      "cityEmpty": "Nenhuma cidade encontrada"
+    },
+    "displayNames": {
+      "São Francisco": "São Chico",
+      "Navegantes": "Navega",
+      "Itajaí": "Brava",
+      "Balneário Camboriú": "BC",
+      "Campeche": "Campeche",
+      "Guarda do Embaú": "Guarda",
+      "Silveira": "Silveira",
+      "Praia da Vila": "Vila"
+    }
+  },
+  "forecast": {
+    "toggle": {
+      "daily": "Hoje",
+      "weekly": "Semana"
+    },
+    "aria": {
+      "forecastType": "Tipo de previsão",
+      "infoCarousel": "Informações da previsão"
+    },
+    "actions": {
+      "next": "Próximo"
+    },
+    "emptyState": {
+      "title": "Pronto para o drop?",
+      "description": "Escolha uma região e praia para ver a previsão detalhada de ondas e ventos."
+    },
+    "labels": {
+      "height": "Altura",
+      "swell": "Swell",
+      "wind": "Vento",
+      "tide": "Maré",
+      "peak": "Ápice"
+    },
+    "fallback": "n/a",
+    "moonPhases": {
+      "new": "lua nova",
+      "waxingCrescent": "lua crescente",
+      "firstQuarter": "quarto crescente",
+      "waxingGibbous": "lua gibosa",
+      "full": "lua cheia",
+      "waningGibbous": "lua balsamica",
+      "lastQuarter": "quarto minguante",
+      "waningCrescent": "lua minguante"
+    },
+    "periods": [
+      "matutino",
+      "vespertino",
+      "noturno"
+    ],
+    "infoCards": [
+      {
+        "icon": "surfing",
+        "title": "Como funciona",
+        "text": "O SurfCond ajuda você a entender o mar com precisão. Veja a previsão diária a cada 3 horas ou a semanal agrupada por matutino, vespertino e noturno.",
+        "wide": true
+      },
+      {
+        "icon": "waves",
+        "title": "Altura da onda",
+        "text": "Tamanho médio das ondas em metros."
+      },
+      {
+        "icon": "navigation",
+        "title": "Direção do swell",
+        "text": "Indica de onde as ondas estão vindo."
+      },
+      {
+        "icon": "schedule",
+        "title": "Período",
+        "text": "Intervalo entre ondas. Períodos maiores tendem a formar ondas melhores."
+      },
+      {
+        "icon": "water",
+        "title": "Maré",
+        "text": "Variação do nível do mar que influencia a formação das ondas."
+      },
+      {
+        "icon": "air",
+        "title": "Vento",
+        "text": "Direção e velocidade que afetam diretamente a qualidade do surf."
+      }
+    ]
+  },
+  "locations": {
+    "sao francisco": { "lat": -26.2305, "lng": -48.5004 },
+    "navegantes": { "lat": -26.8838, "lng": -48.6487 },
+    "itajai": { "lat": -26.8995, "lng": -48.6319 },
+    "balneario camboriu": { "lat": -26.9811, "lng": -48.6333 },
+    "campeche": { "lat": -27.6896, "lng": -48.4817 },
+    "guarda do embau": { "lat": -27.9032, "lng": -48.5896 },
+    "silveira": { "lat": -28.0489, "lng": -48.6186 },
+    "praia da vila": { "lat": -28.2294, "lng": -48.6558 }
+  }
+}
