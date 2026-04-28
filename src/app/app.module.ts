@@ -9,6 +9,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule } from '@angular/common/http';
 import { DirectionPipe } from './shared/pipes/direction.pipe';
 import { ForecastComponent } from './features/forecast/forecast.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 registerLocaleData(localePt);
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ registerLocaleData(localePt);
     AppRoutingModule,
     HomeModule,
     HttpClientModule,
-    NgSelectModule
+    NgSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }
