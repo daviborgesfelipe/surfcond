@@ -2,8 +2,10 @@
   <div class="overlay">
     <div class="home-container">
       <h1>{{ cidadeSelecionada ? (cidadeSelecionada | abreviarCidade) : 'SurfCond' }}</h1>
-      <app-region-selector (regiaoChange)="onRegiaoSelecionada($event)"></app-region-selector>
-      <app-city-selector [regiao]="regiaoSelecionada" (cidadeChange)="onCidadeSelecionada($event)"></app-city-selector>
+      <div class="selector-row">
+        <app-region-selector (regiaoChange)="onRegiaoSelecionada($event)"></app-region-selector>
+        <app-city-selector [regiao]="regiaoSelecionada" (cidadeChange)="onCidadeSelecionada($event)"></app-city-selector>
+      </div>
       <app-forecast [cidade]="cidadeSelecionada"></app-forecast>
     </div>
   </div>

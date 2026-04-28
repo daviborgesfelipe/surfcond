@@ -1,134 +1,198 @@
-<div class="toggle-container" *ngIf="forecastDiaria.length && forecastSemanal.length">
-  <div class="pagination-container" >
-    <button *ngIf="!isMobile"
-      class="nav-button" 
-      (click)="paginaAnterior()" 
-      [disabled]="paginaAtual === 0">
-      Anterior
+<div class="forecast-toolbar" *ngIf="cidade && forecastDiaria.length && forecastSemanal.length">
+  <div></div>
+
+  <div class="forecast-segmented" role="tablist" [attr.aria-label]="textos.aria.forecastType">
+    <button
+      type="button"
+      class="forecast-segmented__button"
+      [class.forecast-segmented__button--active]="tipoPrevisao === 'diaria'"
+      (click)="selecionarTipoPrevisao('diaria')">
+      {{ textos.toggle.daily }}
+    </button>
+    <button
+      type="button"
+      class="forecast-segmented__button"
+      [class.forecast-segmented__button--active]="tipoPrevisao === 'semanaria'"
+      (click)="selecionarTipoPrevisao('semanaria')">
+      {{ textos.toggle.weekly }}
     </button>
   </div>
-  <div class="toggle-container">
-    <label class="switch">
-      <input type="checkbox" [(ngModel)]="tipoPrevisaoChecked" (change)="alternarTipoPrevisao()" />
-      <span class="slider round"></span>
-    </label>
-    <span class="toggle-label">{{ tipoPrevisao === 'diaria' ? ' Previsão Diária' : ' Previsão Semanal' }}</span>
-  </div>
-  <div class="pagination-container">
-    <button *ngIf="!isMobile"
-      class="nav-button" 
-      (click)="proximaPagina()" 
-      title="Próximo"
-      [disabled]="(paginaAtual + 1) >= forecastSemanal.length">
-      Próximo
+
+  <div class="forecast-nav">
+    <button
+      class="nav-button nav-button--icon"
+      (click)="paginaAnterior()"
+      [disabled]="paginaAtual === 0">
+      <span class="material-icons" aria-hidden="true">arrow_back</span>
+    </button>
+
+    <button
+      class="nav-button nav-button--icon"
+      (click)="proximaPagina()"
+      [title]="textos.actions.next"
+      [disabled]="isProximaPaginaDisabled()">
+      <span class="material-icons" aria-hidden="true">arrow_forward</span>
     </button>
   </div>
 </div>
 
 <div *ngIf="!forecastDiaria.length && !forecastSemanal.length">
   <div class="titulo-container">
-    <br>
+    <div class="empty-state">
+      <div class="empty-card">
+      <div class="empty-card__icon">
+        <span class="material-icons" aria-hidden="true">waves</span>
+      </div>
+      <h2>{{ textos.emptyState.title }}</h2>
+      <p>{{ textos.emptyState.description }}</p>
+      </div>
 
-    <!-- Resumo para mobile -->
-    <div class="resumo-curto" *ngIf="isMobile">
-      <span>
-        O <strong>SurfCond</strong> ajuda você a identificar os melhores momentos para surfar com base em dados atualizados do mar.
-        A previsão <strong>diária</strong> mostra as condições de 3 em 3 horas. Já a <strong>semanal</strong> resume os dados por períodos do dia.
-        São exibidas informações como:
-        <br><br>
-        <strong>Altura da onda</strong> (em metros), <strong>direção</strong> da ondulação, <strong>período</strong> (tempo entre ondas), <strong>maré</strong>, além da <strong>velocidade</strong> e <strong>direção do vento</strong>.
-      </span>
-    </div>
-
-    <!-- Resumo para desktop -->
-    <div class="resumo-completo" *ngIf="!isMobile">
-      <span>
-        O <strong>SurfCond</strong> é a sua ferramenta para entender as condições do mar com precisão.
-        Com ele, você pode visualizar a <strong>previsão diária</strong> (a cada 3 horas) ou a <strong>previsão semanal</strong> (agrupada em matutino, vespertino e noturno).
-      </span><br><br>
-
-      <span><strong>Altura da Onda:</strong> tamanho médio das ondas (m).</span><br>
-      <span><strong>Direção da Onda:</strong> de onde as ondas estão vindo (ex: Leste).</span><br>
-      <span><strong>Período:</strong> intervalo entre ondas consecutivas. Períodos maiores indicam melhores ondulações.</span><br>
-      <span><strong>Maré:</strong> variação no nível do mar que influencia na formação das ondas.</span><br>
-      <span><strong>Vento:</strong> inclui direção e velocidade, que afetam diretamente a qualidade das ondas.</span><br><br>
-
-      <span>
-        Com essas informações, você pode planejar suas sessões com mais segurança e performance,
-        aproveitando o melhor do swell e evitando viagens sem onda.
-      </span>
+      <div class="info-carousel" [attr.aria-label]="textos.aria.infoCarousel">
+        <button class="info-carousel__button info-carousel__button--prev" type="button" (click)="moveInfoCarousel(-1)">
+          <span class="material-icons" aria-hidden="true">chevron_left</span>
+        </button>
+        <div
+          #infoCarousel
+          class="info-carousel__viewport"
+          (scroll)="keepCarouselInLoop()"
+          (pointerdown)="onCarouselPointerDown($event)"
+          (pointermove)="onCarouselPointerMove($event)"
+          (pointerup)="onCarouselPointerUp($event)"
+          (pointercancel)="onCarouselPointerUp($event)">
+          <div class="info-card" [class.info-card--wide]="card.wide" *ngFor="let card of infoCarouselItems">
+            <span class="material-icons" aria-hidden="true">{{ card.icon }}</span>
+            <strong>{{ card.title }}</strong>
+            <p>{{ card.text }}</p>
+          </div>
+        </div>
+        <button class="info-carousel__button info-carousel__button--next" type="button" (click)="moveInfoCarousel(1)">
+          <span class="material-icons" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="tipoPrevisao === 'diaria' && forecastDiaria.length">
-  <div *ngFor="let hour of forecastDiariaPaginada | slice:0:24">
-    <p><strong>Hora: {{ hour.time | date:'shortTime' }}, {{ currentDiariaDate | date: 'EEEE, d \'de\' MMMM' }}</strong></p>
-    <div class="row">
-      <div class="col">
-        <p><strong>Onda:</strong> {{ (hour.waveHeight  | number:'1.1-2') || 'n/a' }} m</p>
-        <p><strong>Direção:</strong> {{ (hour.waveDirection | direction) || 'n/a' }}</p>
-        <p><strong>Período:</strong> {{ (hour.wavePeriod | number:'1.1-2') || 'n/a' }} s</p>
-      </div>
-      <div class="col">
-        <p><strong>Maré:</strong> {{ hour.seaLevel | number:'1.1-2' }}</p>
-        <p><strong>Vento:</strong> {{ hour.windDirection | direction }}</p>
-        <p><strong>Velo:</strong> {{ hour.windSpeed | kmh | number:'1.1-2' }} km/h</p>
-      </div>
-    </div>
-    <hr />
+<div class="forecast-list forecast-list--daily" [class.forecast-list--animate]="animarEntrada" *ngIf="tipoPrevisao === 'diaria' && forecastDiaria.length">
+  <div class="forecast-date">
+    <span class="material-icons" aria-hidden="true">calendar_today</span>
+    {{ currentDiariaDate | date: 'EEEE, d \'de\' MMMM' }}
   </div>
 
-  <div class="pagination-container" *ngIf="isMobile">
-    <button 
-      class="nav-button" 
-      (click)="paginaAnterior()" 
-      [disabled]="paginaAtual === 0">
-      Anterior
-    </button>
-    <button 
-      class="nav-button" 
-      (click)="proximaPagina()" 
-      [disabled]="(paginaAtual + 1) * itensPorPagina >= forecastDiaria.length">
-      Próximo
-    </button>
+  <div class="forecast-card" *ngFor="let hour of forecastDiariaPaginada | slice:0:24; let i = index">
+    <div class="forecast-card__header">
+      <p class="forecast-card__title">
+        <span class="metric-icon material-icons" aria-hidden="true">schedule</span>
+        <strong>{{ hour.time | date:'shortTime' }}</strong>
+      </p>
+      <span class="forecast-badge">
+        <span class="moon-phase-icon" [ngClass]="getMoonPhaseClass(hour.time)" aria-hidden="true"></span>
+        {{ getMoonPhase(hour.time) }}
+      </span>
+    </div>
+
+    <div class="forecast-grid">
+      <div class="forecast-metric forecast-metric--hero">
+        <strong>{{ textos.labels.height }}</strong>
+        <span *ngIf="hour.waveHeight !== null && hour.waveHeight !== undefined; else alturaDiariaVazia">
+          {{ hour.waveHeight | number:'1.1-2' }}m
+        </span>
+        <ng-template #alturaDiariaVazia><span>n/a</span></ng-template>
+      </div>
+      <div class="forecast-metric">
+        <strong>{{ textos.labels.swell }}</strong>
+        <span>
+          <span
+            class="material-icons swell-direction-icon"
+            aria-hidden="true"
+            [style.transform]="'rotate(' + (((hour.waveDirection || 0) + 180) % 360) + 'deg)'">
+            navigation
+          </span>
+          {{ (hour.waveDirection | direction) || 'n/a' }} <small>{{ (hour.wavePeriod | number:'1.1-2') || 'n/a' }}s</small>
+        </span>
+      </div>
+      <div class="forecast-metric">
+        <strong>{{ textos.labels.wind }}</strong>
+        <span>
+          <span
+            class="material-icons swell-direction-icon"
+            aria-hidden="true"
+            [style.transform]="'rotate(' + (((hour.windDirection || 0) + 90) % 360) + 'deg)'">
+            air
+          </span>
+          {{ (hour.windDirection | direction) || 'n/a' }} <small>{{ hour.windSpeed | kmh | number:'1.1-2' }} km/h</small>
+        </span>
+      </div>
+      <div class="forecast-metric forecast-metric--meta">
+        <strong>{{ textos.labels.tide }}</strong>
+        <span>
+          <span class="material-icons tide-trend-icon" aria-hidden="true">{{ getTideTrendIcon(getDailyTideTrend(i)) }}</span>
+          {{ (hour.seaLevel | number:'1.1-2') || 'n/a' }}m <small>{{ textos.labels.peak }} {{ getDailyTidePeakTime() }}</small>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
 
-<div *ngIf="tipoPrevisao === 'semanaria' && forecastSemanal.length">
-  <div *ngFor="let dia of forecastSemanalPaginado">
-    <h2><strong>{{ dia.data | date: 'EEEE, d \'de\' MMMM' }}</strong></h2>
+<div class="forecast-list forecast-list--weekly" [class.forecast-list--animate]="animarEntrada" *ngIf="tipoPrevisao === 'semanaria' && forecastSemanal.length">
+  <ng-container *ngFor="let dia of forecastSemanalPaginado">
+    <div class="forecast-date">
+      <span class="material-icons" aria-hidden="true">calendar_today</span>
+      <strong>{{ dia.data | date: 'EEEE, d \'de\' MMMM' }}</strong>
+    </div>
 
-    <div *ngFor="let periodo of ['matutino', 'vespertino', 'noturno']">
-      <p><strong>{{ periodo | titlecase }}:</strong></p>
-      <div class="row">
-        <div class="col">
-          <p><strong>Onda:</strong> {{ (dia[periodo]?.waveHeight | number:'1.1-2') || 'n/a' }} m</p>
-          <p><strong>Direção:</strong> {{ (dia[periodo]?.waveDirection | direction) || 'n/a' }}</p>
-          <p><strong>Período:</strong> {{ (dia[periodo]?.wavePeriod | number:'1.1-2') || 'n/a' }} s</p>
+    <div class="forecast-card" *ngFor="let periodo of textos.periods">
+      <div class="forecast-card__header">
+        <p class="forecast-card__title">
+          <span class="metric-icon material-icons" aria-hidden="true">schedule</span>
+          <strong>{{ periodo | titlecase }}</strong>
+        </p>
+        <span class="forecast-badge">
+          <span class="moon-phase-icon" [ngClass]="getMoonPhaseClass(dia.data)" aria-hidden="true"></span>
+          {{ getMoonPhase(dia.data) }}
+        </span>
+      </div>
+
+      <div class="forecast-grid">
+        <div class="forecast-metric forecast-metric--hero">
+          <strong>{{ textos.labels.height }}</strong>
+          <span *ngIf="dia[periodo]?.waveHeight !== null && dia[periodo]?.waveHeight !== undefined; else alturaSemanalVazia">
+            {{ dia[periodo]?.waveHeight | number:'1.1-2' }}m
+          </span>
+          <ng-template #alturaSemanalVazia><span>n/a</span></ng-template>
         </div>
-        <div class="col">
-          <p><strong>Maré:</strong> {{ (dia[periodo]?.seaLevel | number:'1.1-2') || 'n/a' }}</p>
-          <p><strong>Vento:</strong> {{ dia[periodo]?.windDirection | direction }}</p>
-          <p><strong>Velo:</strong> {{ dia[periodo]?.windSpeed | kmh | number:'1.1-2' }} km/h</p>
+        <div class="forecast-metric">
+          <strong>{{ textos.labels.swell }}</strong>
+          <span>
+            <span
+              class="material-icons swell-direction-icon"
+              aria-hidden="true"
+              [style.transform]="'rotate(' + ((((dia[periodo]?.waveDirection || 0) + 180) % 360)) + 'deg)'">
+              navigation
+            </span>
+            {{ (dia[periodo]?.waveDirection | direction) || 'n/a' }} <small>{{ (dia[periodo]?.wavePeriod | number:'1.1-2') || 'n/a' }}s</small>
+          </span>
+        </div>
+        <div class="forecast-metric">
+          <strong>{{ textos.labels.wind }}</strong>
+          <span>
+            <span
+              class="material-icons swell-direction-icon"
+              aria-hidden="true"
+              [style.transform]="'rotate(' + ((((dia[periodo]?.windDirection || 0) + 90) % 360)) + 'deg)'">
+              air
+            </span>
+            {{ (dia[periodo]?.windDirection | direction) || 'n/a' }} <small>{{ dia[periodo]?.windSpeed | kmh | number:'1.1-2' }} km/h</small>
+          </span>
+        </div>
+        <div class="forecast-metric forecast-metric--meta">
+          <strong>{{ textos.labels.tide }}</strong>
+          <span>
+            <span class="material-icons tide-trend-icon" aria-hidden="true">{{ getTideTrendIcon(getWeeklyTideTrend(dia, periodo)) }}</span>
+            {{ (dia[periodo]?.seaLevel | number:'1.1-2') || 'n/a' }}m <small>{{ textos.labels.peak }} {{ dia[periodo]?.tidePeakTime || 'n/a' }}</small>
+          </span>
         </div>
       </div>
-      <hr />
     </div>
-
-    <div class="pagination-container" *ngIf="isMobile">
-      <button 
-        class="nav-button" 
-        (click)="paginaAnterior()" 
-        [disabled]="paginaAtual === 0">
-        Anterior
-      </button>
-      <button 
-        class="nav-button" 
-        (click)="proximaPagina()" 
-        [disabled]="(paginaAtual + 1) >= forecastSemanal.length">
-        Próximo
-      </button>
-    </div>
-  </div>
+  </ng-container>
 </div>

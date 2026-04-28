@@ -2,26 +2,158 @@
   box-sizing: border-box;
 }
 
-.selector {
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #0f2c2e;
+}
+
+.forecast-list--animate {
+  animation: forecast-in .4s ease both;
+}
+
+@keyframes forecast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-carousel {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  display: flex;
-  justify-content: center;
+  padding: 0.25rem 2.1rem 0.65rem;
 }
 
-.btn-selector {
-  width: 80%;
-  padding: 0.8rem 1.2rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 2px solid #ffcc00;
-  font-weight: bold;
-  font-size: 1.1rem;
+.info-carousel__viewport {
   display: flex;
-  justify-content: space-between;
+  gap: 0.75rem;
+  overflow-x: auto;
+  cursor: grab;
+  scrollbar-width: none;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.info-carousel__viewport:active {
+  cursor: grabbing;
+}
+
+.info-carousel__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.info-carousel__button {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: inline-flex;
+  width: 1.8rem;
+  height: 1.8rem;
   align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  transform: translateY(-50%);
   cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-.btn-selector:hover {
-  background-color: rgba(255, 255, 255, 1);
+.info-carousel__button--prev {
+  left: 0;
+}
+
+.info-carousel__button--next {
+  right: 0;
+}
+
+.info-carousel__button .material-icons {
+  font-size: 1.25rem;
+}
+
+.info-card {
+  flex: 0 0 min(78vw, 14rem);
+  min-height: 11rem;
+  padding: 0.95rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+}
+
+.info-card--wide {
+  flex-basis: min(86vw, 16.25rem);
+}
+
+.info-card .material-icons {
+  color: #13c99a;
+  font-size: 1.35rem;
+}
+
+.info-card strong {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.info-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.moon-phase-icon {
+  display: inline-block;
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: 0 0 auto;
+  overflow: hidden;
+  background: #ecf1ed;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  box-shadow: inset -0.1rem -0.08rem 0.16rem rgba(15, 44, 46, 0.28);
+}
+
+.moon-phase-icon--new {
+  background: #203637;
+}
+
+.moon-phase-icon--waxing-crescent {
+  background: radial-gradient(circle at 32% 50%, #203637 0 48%, transparent 49%), #ecf1ed;
+}
+
+.moon-phase-icon--first-quarter {
+  background: linear-gradient(90deg, #203637 0 50%, #ecf1ed 50% 100%);
+}
+
+.moon-phase-icon--waxing-gibbous {
+  background: radial-gradient(circle at 18% 50%, #203637 0 42%, transparent 43%), #ecf1ed;
+}
+
+.moon-phase-icon--full {
+  background: #ecf1ed;
+}
+
+.moon-phase-icon--waning-gibbous {
+  background: radial-gradient(circle at 82% 50%, #203637 0 42%, transparent 43%), #ecf1ed;
+}
+
+.moon-phase-icon--last-quarter {
+  background: linear-gradient(90deg, #ecf1ed 0 50%, #203637 50% 100%);
+}
+
+.moon-phase-icon--waning-crescent {
+  background: radial-gradient(circle at 68% 50%, #203637 0 48%, transparent 49%), #ecf1ed;
 }

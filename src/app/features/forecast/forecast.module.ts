@@ -6,7 +6,7 @@ import { ForecastComponent } from './forecast.component';
 import { DirectionPipe } from 'src/app/shared/pipes/direction.pipe';
 import { FormsModule } from '@angular/forms';
 import { KmhPipe } from 'src/app/shared/pipes/kmPorHora.pipe';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { KmhPipe } from 'src/app/shared/pipes/kmPorHora.pipe';
   imports: [
     CommonModule,
     ForecastRoutingModule,
-    FormsModule
+    FormsModule,
+    MatSlideToggleModule
   ],
   exports: [
     ForecastComponent // ← necessário para ser usado fora do módulo
