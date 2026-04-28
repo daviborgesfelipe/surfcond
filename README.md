@@ -32,7 +32,7 @@ Clone o repositório e instale as dependências:
 git clone https://github.com/daviborgesfelipe/surfcond.git
 cd surfcond
 npm install
-ng serve
+npm start
 ```
 
 Acesse a aplicação local em: `http://localhost:4200`
