@@ -54,15 +54,6 @@ h1 {
   backdrop-filter: blur(18px);
   color: $deep-ocean;
 
-  &::before {
-    content: "SurfCond";
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
   @media (min-width: 768px) {
     width: min(86vw, 58rem);
     min-height: calc(100vh - 4rem);
@@ -77,6 +68,19 @@ h1 {
     padding: 2rem;
     border-radius: 28px;
   }
+}
+
+.brand-logo {
+  width: clamp(11rem, 26vw, 16rem);
+  margin-top: 0.35rem;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.28));
+}
+
+.brand-logo--home {
+  width: clamp(15rem, 42vw, 24rem);
+  margin: 1rem 0 0.8rem;
 }
 
 app-region-selector,

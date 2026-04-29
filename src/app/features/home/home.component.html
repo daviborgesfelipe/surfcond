@@ -1,7 +1,8 @@
 <div class="hero-background">
   <div class="overlay">
     <div class="home-container">
-      <h1>{{ cidadeSelecionada ? (cidadeSelecionada | abreviarCidade) : 'SurfCond' }}</h1>
+      <img class="brand-logo" [class.brand-logo--home]="!cidadeSelecionada" src="assets/img/logo.png" alt="SurfCond">
+      <h1 *ngIf="cidadeSelecionada">{{ cidadeSelecionada | abreviarCidade }}</h1>
       <div class="selector-row">
         <app-region-selector (regiaoChange)="onRegiaoSelecionada($event)"></app-region-selector>
         <app-city-selector [regiao]="regiaoSelecionada" (cidadeChange)="onCidadeSelecionada($event)"></app-city-selector>
