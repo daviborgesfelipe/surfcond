@@ -32,6 +32,8 @@ export class ForecastComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   itensPorPagina = 3;
   isMobile: boolean = false;
   animarEntrada = false;
+  isLoading = false;
+  private forecastRequestId = 0;
   private carouselTimer?: ReturnType<typeof setInterval>;
   private carouselResumeTimer?: ReturnType<typeof setTimeout>;
   private isDraggingCarousel = false;
@@ -70,8 +72,6 @@ export class ForecastComponent implements OnInit, OnChanges, AfterViewInit, OnDe
 
       this.paginaAtual = 0;
       this.animarEntrada = true;
-      this.forecastDiaria = [];
-      this.forecastSemanal = [];
       this.carregarPrevisoes(changes['cidade'].currentValue);
     }
   }
@@ -125,24 +125,28 @@ export class ForecastComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     this.animarEntrada = false;
     this.tipoPrevisao = tipo;
     this.paginaAtual = 0;
-    if (this.cidade) {
-      this.carregarPrevisoes(this.cidade);
-    }
   }
 
   carregarPrevisoes(cidade: string) {
+    const requestId = ++this.forecastRequestId;
+    this.isLoading = true;
     const cidadeFormatada = this.normalizeText(cidade);
 
     const praias = appContent.locations;
     const coords = praias[cidadeFormatada as keyof typeof praias];
-    if (!coords) return;
+    if (!coords) {
+      this.isLoading = false;
+      return;
+    }
 
     const { lat, lng } = coords;
 
     forkJoin({
       ondas: this.stormglassService.getForecastLive(lat, lng),
       vento: this.stormglassService.getForecastWind(lat, lng),
-    }).subscribe(({ ondas, vento }) => {
+    }).subscribe({
+      next: ({ ondas, vento }) => {
+      if (requestId !== this.forecastRequestId) return;
       const horas = ondas.hourly.time;
       const hoje = new Date();
       const diaHoje = hoje.toISOString().split('T')[0];
@@ -229,6 +233,14 @@ export class ForecastComponent implements OnInit, OnChanges, AfterViewInit, OnDe
         );
 
       this.paginaAtual = 0;
+      this.isLoading = false;
+      },
+      error: () => {
+        if (requestId !== this.forecastRequestId) return;
+        this.forecastDiaria = [];
+        this.forecastSemanal = [];
+        this.isLoading = false;
+      },
     });
   }
 
@@ -237,6 +249,7 @@ export class ForecastComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     this.tipoPrevisao = 'diaria';
     this.forecastDiaria = [];
     this.forecastSemanal = [];
+    this.isLoading = false;
     setTimeout(() => {
       this.centerCarousel();
       this.startCarouselAutoPlay();

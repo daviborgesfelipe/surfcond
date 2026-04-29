@@ -1,3 +1,7 @@
+<div class="forecast-search-loading" *ngIf="isLoading" aria-hidden="true">
+  <span></span>
+</div>
+
 <div class="forecast-toolbar" *ngIf="cidade && forecastDiaria.length && forecastSemanal.length">
   <div></div>
 
@@ -36,7 +40,7 @@
   </div>
 </div>
 
-<div *ngIf="!forecastDiaria.length && !forecastSemanal.length">
+<div *ngIf="!isLoading && !forecastDiaria.length && !forecastSemanal.length">
   <div class="titulo-container">
     <div class="empty-state">
       <div class="empty-card">
@@ -73,7 +77,7 @@
   </div>
 </div>
 
-<div class="forecast-list forecast-list--daily" [class.forecast-list--animate]="animarEntrada" *ngIf="tipoPrevisao === 'diaria' && forecastDiaria.length">
+<div class="forecast-list forecast-list--daily" [class.forecast-list--animate]="animarEntrada" [class.forecast-list--loading]="isLoading" *ngIf="tipoPrevisao === 'diaria' && forecastDiaria.length">
   <div class="forecast-date">
     <span class="material-icons" aria-hidden="true">calendar_today</span>
     {{ currentDiariaDate | date: 'EEEE, d \'de\' MMMM' }}
@@ -134,7 +138,7 @@
   </div>
 </div>
 
-<div class="forecast-list forecast-list--weekly" [class.forecast-list--animate]="animarEntrada" *ngIf="tipoPrevisao === 'semanaria' && forecastSemanal.length">
+<div class="forecast-list forecast-list--weekly" [class.forecast-list--animate]="animarEntrada" [class.forecast-list--loading]="isLoading" *ngIf="tipoPrevisao === 'semanaria' && forecastSemanal.length">
   <ng-container *ngFor="let dia of forecastSemanalPaginado">
     <div class="forecast-date">
       <span class="material-icons" aria-hidden="true">calendar_today</span>
