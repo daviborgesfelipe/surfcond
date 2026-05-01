@@ -4,6 +4,7 @@
   <ng-select
     class="combo-selector"
     [items]="cidades"
+    [searchable]="false"
     [placeholder]="cidadeSelecionada ? '' : textos.placeholders.city"
     [(ngModel)]="cidadeSelecionada"
     (change)="onChange()"
